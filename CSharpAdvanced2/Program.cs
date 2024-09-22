@@ -41,49 +41,37 @@ using System.Net.NetworkInformation;
 //48:30 - Creating a Generic Linked List Class Stub
 //50:39 - Implementing a Generic Linked List
 
-namespace CSharpAdvanced2
-{
-    class LinkedList<T>
-    {
-        class Node
-        {
-            T Value;
-            Node Next;
-        }
+//namespace CSharpAdvanced2
+//{
+//    class LinkedList<T>
+//    {
+//        class Node
+//        {
+//            T Value;
+//            Node Next;
+//        }
 
-        private LinkedList<T>.Node _first;
-        public int Count { get, private set; }
+//        private LinkedList<T>.Node _first;
+//        public int Count { get, private set; }
 
-        public void Add(T item) { }
-        public void Remove(T item) { }
-        public T Get(int index) { return default(T); }
-    }
+//        public void Add(T item) { }
+//        public void Remove(T item) { }
+//        public T Get(int index) { return default(T); }
+//    }
 
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
+//    public class Program
+//    {
+//        public static void Main(string[] args)
+//        {
 
-            Console.ReadKey();
-        }
-    }
-}
+//            Console.ReadKey();
+//        }
+//    }
+//}
 
 #endregion
 
 #region
-//52:47 - Using Generics in Nested Types
-//54:51 - Structures and Classes: Understanding the Difference
-//56:44 - Why Value Types Cannot Be Null
-//58:59 - Understanding Generic Constraints
-//1:01:01 - Constraining Generic Type Parameters
-//1:03:08 - Enforcing Interface Constraints with C++
-//1:05:10 - Understanding the Syntax of Generic Types
-//1:07:20 - Generics and Reflection in C#
-//1:09:37 - Implementing an Interface with a Linked List
-//1:11:52 - Constraining Generic Type Parameters
-//1:13:57 - Constraining Generic Parameters
-//1:16:01 - Constructing a Generic Method with a Delegate
 //1:18:00 - Combining Generics for Static Typing
 //1:20:22 - Working with Generic Types
 //1:22:35 - Creating a Person Class and Filtering Names
@@ -95,8 +83,138 @@ namespace CSharpAdvanced2
 //1:37:00 - Breaking Down a Generic Method
 //1:39:00 - Using Projection to Create a Graphing Program
 //1:41:19 - Understanding Implicit Typing and Generic Type Inference
+
+//namespace CSharpAdvanced2
+//{
+//    class Person
+//    {
+//        public string FirstName { get; set; }
+//        public string LastName { get; set; }
+
+//        public Person(string firstName, string lastName)
+//        {
+//            FirstName = firstName;
+//            LastName = lastName;
+//        }
+//    }
+//    public class Program
+//    {
+//        public static void Main(string[] args)
+//        {
+//            List<Person> people = new List<Person> { new Person("Aaron", "p2"), new Person("Andrew", "a2"), new Person("Nelson", "b2") };
+//            IEnumerable<Person> people2 = Filter(people, p => p.FirstName.StartsWith("A", StringComparison.CurrentCultureIgnoreCase));
+//            // As shown above, people and people2 represent different data types
+
+//            //people.Add(new Person("AFace", "person"));
+
+//            //Console.WriteLine("First Iteration: ");
+//            //foreach (var person in people2)
+//            //    Console.WriteLine(person.FirstName);
+
+//            //people.Add(new Person("AFace", "person"));
+
+//            //Console.WriteLine("Second Iteration: ");
+//            //foreach (var person in people2)
+//            //    Console.WriteLine(person.FirstName);
+
+//            IEnumerable<string> firstNames = Map<Person, string>(people2, p => p.FirstName);
+//            var firstNames2 = Map(people2, p => p.FirstName);
+//            // Those lines above represent exactly the same thing
+//            foreach (string name in firstNames2)
+//                Console.WriteLine(name);
+
+//            //var list = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+//            //var odd = Filter<int>(list, i => i % 3 == 0);
+//            //var even = Filter(list, i => i % 5 == 0);
+
+//            //Console.WriteLine("ODD: ");
+//            //foreach (var item in odd)
+//            //    Console.WriteLine(item);
+
+//            //Console.WriteLine("EVEN: ");
+//            //foreach (var item in even)
+//            //    Console.WriteLine(item);
+
+//            Console.ReadKey();
+//        }
+
+//        static IEnumerable<TResult> Map<TSource, TResult>(IEnumerable<TSource> source, Func<TSource, TResult> projection)
+//        {
+//            foreach (var item in source)
+//            {
+//                yield return projection(item);
+//            }
+//        }
+
+//        static IEnumerable<T> Filter<T>(IEnumerable<T> source, Func<T, bool> predicate)
+//        {
+//            foreach (var item in source)
+//                if (predicate(item))
+//                    yield return item;
+//        }
+//    }
+//}
+
+#endregion
+
+#region
+
 //1:43:42 - LINQ: A Collection of Techniques
 //1:45:51 - Chaining Extension Methods with LINQ
+
+namespace CSharpAdvanced2
+{
+    class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public Person(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+    }
+
+    static class EnumerableExtensions
+    {
+        public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> projection)
+        {
+            foreach (var item in source)
+                yield return projection(item);
+        }
+
+        public static IEnumerable<T> Filter<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        {
+            foreach (var item in source)
+                if (predicate(item))
+                    yield return item;
+        }
+    }
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var people = new List<Person> { new Person("Aaron", "p2"), new Person("Andrew", "a2"), new Person("Nelson", "b2") };
+            var firstNames = people
+                .Filter(i => i.FirstName.StartsWith("a", StringComparison.CurrentCultureIgnoreCase))
+                .Map(p => p.FirstName);
+
+            // We can chain methods (.Filter().Map()) if they are extensible like LINQ; this is more readable
+            // They are invocable on IEnumerables
+
+            foreach (var name in firstNames)
+            {
+                Console.WriteLine(name);
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+#endregion
+
+#region
+
 //1:48:00 - Exploring the LINQ Namespace in C#
 //1:50:12 - Exploring LINQ Methods
 //1:52:00 - Combining First and Default with Predicates
