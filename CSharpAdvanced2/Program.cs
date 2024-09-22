@@ -162,6 +162,60 @@ using System.Net.NetworkInformation;
 //1:43:42 - LINQ: A Collection of Techniques
 //1:45:51 - Chaining Extension Methods with LINQ
 
+//namespace CSharpAdvanced2
+//{
+//    class Person
+//    {
+//        public string FirstName { get; set; }
+//        public string LastName { get; set; }
+//        public Person(string firstName, string lastName)
+//        {
+//            FirstName = firstName;
+//            LastName = lastName;
+//        }
+//    }
+
+//    static class EnumerableExtensions
+//    {
+//        public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> projection)
+//        {
+//            foreach (var item in source)
+//                yield return projection(item);
+//        }
+
+//        public static IEnumerable<T> Filter<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+//        {
+//            foreach (var item in source)
+//                if (predicate(item))
+//                    yield return item;
+//        }
+//    }
+//    public class Program
+//    {
+//        public static void Main(string[] args)
+//        {
+//            var people = new List<Person> { new Person("Aaron", "p2"), new Person("Andrew", "a2"), new Person("Nelson", "b2") };
+//            var firstNames = people
+//                .Filter(i => i.FirstName.StartsWith("a", StringComparison.CurrentCultureIgnoreCase))
+//                .Map(p => p.FirstName);
+
+//            // We can chain methods (.Filter().Map()) if they are extensible like LINQ; this is more readable
+//            // They are invocable on IEnumerables
+
+//            foreach (var name in firstNames)
+//            {
+//                Console.WriteLine(name);
+//            }
+
+//            Console.ReadKey();
+//        }
+//    }
+//}
+#endregion
+
+#region
+// LINQ
+
 namespace CSharpAdvanced2
 {
     class Person
@@ -174,7 +228,6 @@ namespace CSharpAdvanced2
             LastName = lastName;
         }
     }
-
     static class EnumerableExtensions
     {
         public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> projection)
@@ -182,7 +235,6 @@ namespace CSharpAdvanced2
             foreach (var item in source)
                 yield return projection(item);
         }
-
         public static IEnumerable<T> Filter<T>(this IEnumerable<T> source, Func<T, bool> predicate)
         {
             foreach (var item in source)
@@ -196,25 +248,28 @@ namespace CSharpAdvanced2
         {
             var people = new List<Person> { new Person("Aaron", "p2"), new Person("Andrew", "a2"), new Person("Nelson", "b2") };
             var firstNames = people
-                .Filter(i => i.FirstName.StartsWith("a", StringComparison.CurrentCultureIgnoreCase))
-                .Map(p => p.FirstName);
+                .Where(i => i.FirstName.StartsWith("a", StringComparison.CurrentCultureIgnoreCase)) // LINQ
+                .Select(p => p.FirstName); // LINQ
 
-            // We can chain methods (.Filter().Map()) if they are extensible like LINQ; this is more readable
-            // They are invocable on IEnumerables
+            // QUERY SYNTAX is also a valid syntax in C#
+            // var firstNames = people
+            //      from p in people
+            //      where p.FirstName.StartsWith("a", StringComparison.CurrentCultureIgnoreCase))
+            //  .   select p.FirstName;
 
             foreach (var name in firstNames)
             {
                 Console.WriteLine(name);
             }
-
             Console.ReadKey();
         }
     }
 }
 #endregion
 
-#region
+#endregion
 
+#region
 //1:48:00 - Exploring the LINQ Namespace in C#
 //1:50:12 - Exploring LINQ Methods
 //1:52:00 - Combining First and Default with Predicates
