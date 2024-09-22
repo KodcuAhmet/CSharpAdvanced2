@@ -8,21 +8,61 @@ using System.Net.NetworkInformation;
 
 // Generics provide type safety, code reusability, performance optimization, and flexibility
 
+//33:46 - Benefits of Generics in C#
+//35:49 - Benefits of Generics
+//37:56 - Using Generics for Type Safety
+//39:59 - Understanding Generic Types in C#
+//42:14 - Limitations of Generic Types in C#
+//44:11 - Understanding Generic Parameters in C#
+//namespace CSharpAdvanced2
+//{
+//    class Stuff<TKey>
+//    {
+//        public void Method(TKey key)
+//        {
+//            var blegh = new Stuff<TKey>();
+//        }
+//    }
+//    public class Program
+//    {
+//        public static void Main(string[] args)
+//        {
+//            var stuff = new Stuff<string>();
+//            stuff.Method("Hey!");
+
+//            Console.ReadKey();
+//        }
+//    }
+//}
+
+#endregion
+
+#region
+//48:30 - Creating a Generic Linked List Class Stub
+//50:39 - Implementing a Generic Linked List
+
 namespace CSharpAdvanced2
 {
-    class Stuff<TKey>
+    class LinkedList<T>
     {
-        public void Method(TKey key)
+        class Node
         {
-            var blegh = new Stuff<TKey>();
+            T Value;
+            Node Next;
         }
+
+        private LinkedList<T>.Node _first;
+        public int Count { get, private set; }
+
+        public void Add(T item) { }
+        public void Remove(T item) { }
+        public T Get(int index) { return default(T); }
     }
+
     public class Program
     {
         public static void Main(string[] args)
         {
-            var stuff = new Stuff<string>();
-            stuff.Method("Hey!");
 
             Console.ReadKey();
         }
@@ -32,15 +72,6 @@ namespace CSharpAdvanced2
 #endregion
 
 #region
-//33:46 - Benefits of Generics in C#
-//35:49 - Benefits of Generics
-//37:56 - Using Generics for Type Safety
-//39:59 - Understanding Generic Types in C#
-//42:14 - Limitations of Generic Types in C#
-//44:11 - Understanding Generic Parameters in C#
-//46:13 - Exploring the Depths of Generics
-//48:30 - Creating a Generic Linked List Class Stub
-//50:39 - Implementing a Generic Linked List
 //52:47 - Using Generics in Nested Types
 //54:51 - Structures and Classes: Understanding the Difference
 //56:44 - Why Value Types Cannot Be Null
