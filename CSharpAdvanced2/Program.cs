@@ -215,6 +215,21 @@ using System.Net.NetworkInformation;
 
 #region
 // LINQ
+//1:48:00 - Exploring the LINQ Namespace in C#
+//1:50:12 - Exploring LINQ Methods
+//1:52:00 - Combining First and Default with Predicates
+//1:54:31 - Exploring the Query Syntax of LINQ
+//1:56:38 - Exploring the IEnumerable Class in LINQ
+//1:58:00 - Understanding Enumerables in C#
+//2:00:43 - Understanding Functionality and Types
+//2:02:49 - How the For Each Loop Works with the IEnumerable Interface
+//2:05:13 - Exploring the IQueryable Extension in C#
+//2:07:00 - Bridging the Gap Between LINQ and Databases
+//2:09:25 - Exploring LINQ Methods
+//2:11:21 - Writing the Signatures for Select, Where, First, and All
+//2:14:23 - Understanding Deferred Execution in Programming
+//2:17:00 - Re - Implementing LINQ Methods
+//2:19:09 - Understanding Generics and Iterator Blocks
 
 namespace CSharpAdvanced2
 {
@@ -267,22 +282,34 @@ namespace CSharpAdvanced2
 }
 #endregion
 
-#endregion
-
 #region
-//1:48:00 - Exploring the LINQ Namespace in C#
-//1:50:12 - Exploring LINQ Methods
-//1:52:00 - Combining First and Default with Predicates
-//1:54:31 - Exploring the Query Syntax of LINQ
-//1:56:38 - Exploring the IEnumerable Class in LINQ
-//1:58:00 - Understanding Enumerables in C#
-//2:00:43 - Understanding Functionality and Types
-//2:02:49 - How the For Each Loop Works with the IEnumerable Interface
-//2:05:13 - Exploring the IQueryable Extension in C#
-//2:07:00 - Bridging the Gap Between LINQ and Databases
-//2:09:25 - Exploring LINQ Methods
-//2:11:21 - Writing the Signatures for Select, Where, First, and All
-//2:14:23 - Understanding Deferred Execution in Programming
-//2:17:00 - Re - Implementing LINQ Methods
-//2:19:09 - Understanding Generics and Iterator Blocks
+//\\//\\ ---- HOMEWORK ---- //\\//\\
+
+// Create the following extension methods on IEnumerable<T> : 
+
+// IEnumerable<TResult> MySelect<TSource, TResult>(IEnumerable<TSource>, Func<TSource, TResult> projection)
+//   - for every item in source, return the result of applying the projection predicate
+
+// IEnumerable<TSource> Mywhere<TSource>(IEnumerable<TSource>, Func<TSource, bool> predicate)
+//   - for every item in source, return the item only IF the predicate returns true when applying the item to it
+
+// TSource MyFirst<TSource>(IEnumerable<TSource> source)
+//   - returns the first item of the enumerable
+//   - throws an exception if the enumerable is empty
+
+// TSource MyFirst<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
+//   - returns the first item of the enumerable that matches the predicate
+//   - throws an exception if the enumerable is empty
+
+// bool MyAll<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
+//   - return true if all items in source match the predicate
+
+// bool MyAny<TSource>(IEnumerable<TSource> source)
+//   - returns true if there are any items in the source
+
+// bool MyAny<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
+//   - returns true if there are any items in the source that match the predicate
+
+//   YOU MAY USE ITERATOR BLOCKS BUT YOU MAY NOT USE LINQ
+
 #endregion
