@@ -285,7 +285,7 @@ namespace CSharpAdvanced2
 #region
 //\\//\\ ---- HOMEWORK ---- //\\//\\
 
-// Create the following extension methods on IEnumerable<T> : 
+// Create the following extension methods on IEnumerable<T> on a class called EnumerableExtensions: 
 
 // IEnumerable<TResult> MySelect<TSource, TResult>(IEnumerable<TSource>, Func<TSource, TResult> projection)
 //   - for every item in source, return the result of applying the projection predicate
@@ -312,4 +312,5 @@ namespace CSharpAdvanced2
 
 //   YOU MAY USE ITERATOR BLOCKS BUT YOU MAY NOT USE LINQ
 
+// For fun, implement: Aggregate, SequanceEquals, Last/OrDefault, Single/OrDefault
 #endregion
